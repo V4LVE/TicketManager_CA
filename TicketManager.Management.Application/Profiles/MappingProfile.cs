@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TicketManager.Management.Application.Features.Events;
+using TicketManager.Management.Application.Features.Events.Queries.GetEventDetail;
+using TicketManager.Management.Application.Features.Events.Queries.GetEventsList;
 using TicketManager.Management.Domain.Entities;
 
 namespace TicketManager.Management.Application.Profiles
