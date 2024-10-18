@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketManager.Management.Application.Features.Categories.Commands.CreateCategory;
 using TicketManager.Management.Application.Features.Categories.Queries.GetCategoriesList;
 using TicketManager.Management.Application.Features.Categories.Queries.GetCategoriesListWithEvent;
 using TicketManager.Management.Application.Features.Events.Commands.CreateEvent;
@@ -30,6 +31,8 @@ namespace TicketManager.Management.Application.Profiles
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, CategoryListVm>().ReverseMap();
             CreateMap<Category, CategoryEventListVm>().ReverseMap();
+            CreateMap<Category, CreateCategoryCommand>().ReverseMap();
+            CreateMap<Category, CreateCategoryDto>().ReverseMap();
         }
     }
 }
