@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TicketManager.Management.Application.Contracts.Infrastructure;
 using TicketManager.Management.Application.Models.Mail;
+using TicketManager.Management.Infrastructure.FileExport;
 using TicketManager.Management.Infrastructure.Mail;
 
 namespace TicketManager.Management.Infrastructure
@@ -18,6 +19,7 @@ namespace TicketManager.Management.Infrastructure
             services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
 
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<ICsvExporter, CsvExporter>();
 
             return services;
         }
