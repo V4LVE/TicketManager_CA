@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TicketManager.Management.Api.Utility;
 using TicketManager.Management.Application.Features.Events.Commands.CreateEvent;
 using TicketManager.Management.Application.Features.Events.Commands.DeleteEvent;
 using TicketManager.Management.Application.Features.Events.Commands.UpdateEvent;
@@ -22,7 +23,7 @@ namespace TicketManager.Management.Api.Controllers
         }
 
 
-        [HttpGet(Name = "GetAllEvents")]
+        [HttpGet("all",Name = "GetAllEvents")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult<List<EventListVm>>> GetAllEvents()
@@ -32,7 +33,7 @@ namespace TicketManager.Management.Api.Controllers
         }
 
 
-        [HttpGet("{id}", Name = "GetEventById")]
+        [HttpGet("getbyid/{id}", Name = "GetEventById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult<List<EventListVm>>> GetEventById(int id)
@@ -41,7 +42,7 @@ namespace TicketManager.Management.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost(Name = "AddEvent")]
+        [HttpPost("add",Name = "AddEvent")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<int>> Create([FromBody] CreateEventCommand createEventCommand)
         {
@@ -50,7 +51,7 @@ namespace TicketManager.Management.Api.Controllers
         }
 
 
-        [HttpPut(Name = "UpdateEvent")]
+        [HttpPut("update",Name = "UpdateEvent")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -73,6 +74,7 @@ namespace TicketManager.Management.Api.Controllers
         }
 
         [HttpGet("export", Name = "ExportEvents")]
+        [FileResultContentType("text/csv")]
         public async Task<FileResult> ExportEvents()
         {
             var fileDTO = await _mediator.Send(new GetEventsExportQuery());
