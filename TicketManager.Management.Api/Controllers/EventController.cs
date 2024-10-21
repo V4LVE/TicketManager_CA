@@ -5,6 +5,7 @@ using TicketManager.Management.Application.Features.Events.Commands.CreateEvent;
 using TicketManager.Management.Application.Features.Events.Commands.DeleteEvent;
 using TicketManager.Management.Application.Features.Events.Commands.UpdateEvent;
 using TicketManager.Management.Application.Features.Events.Queries.GetEventDetail;
+using TicketManager.Management.Application.Features.Events.Queries.GetEventsExport;
 using TicketManager.Management.Application.Features.Events.Queries.GetEventsList;
 
 namespace TicketManager.Management.Api.Controllers
@@ -69,6 +70,14 @@ namespace TicketManager.Management.Api.Controllers
             var delete = new DeleteEventCommand() { EventId = id };
             await _mediator.Send(delete);
             return NoContent();
+        }
+
+        [HttpGet("export", Name = "ExportEvents")]
+        public async Task<FileResult> ExportEvents()
+        {
+            var fileDTO = await _mediator.Send(new GetEventsExportQuery());
+
+            return File(fileDTO.Data, fileDTO.ContentType, fileDTO.EventExportFileName);
         }
 
     }
