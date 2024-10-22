@@ -5,14 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketManager.Management.Application.Contracts;
 using TicketManager.Management.Domain.Common;
 
 namespace TicketManager.Management.Persistence
 {
     public class TicketManagerDbContext : DbContext
     {
+        private readonly ILoggedInUserService? _loggedInUserService;
+
         public TicketManagerDbContext(DbContextOptions<TicketManagerDbContext> options) : base(options)
         {
+        }
+
+        public TicketManagerDbContext(DbContextOptions<TicketManagerDbContext> options, ILoggedInUserService loggedInUserService) : base(options)
+        {
+            _loggedInUserService = loggedInUserService;
         }
 
         public DbSet<Domain.Entities.Category> Categories { get; set; }
@@ -104,9 +112,11 @@ namespace TicketManager.Management.Persistence
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedDate = DateTime.Now;
+                        entry.Entity.LastModifiedBy = _loggedInUserService.UserId;
                         break;
                     case EntityState.Added:
                         entry.Entity.CreatedDate = DateTime.Now;
+                        entry.Entity.CreatedBy = _loggedInUserService.UserId;
                         break;
                     default:
                         break;

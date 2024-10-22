@@ -10,7 +10,7 @@ using TicketManager.Management.Domain.Entities;
 
 namespace TicketManager.Management.Application.UnitTest.Mocks
 {
-    public class RepositoryMocks
+    public static class RepositoryMocks
     {
         public static Mock<IAsyncBaseRepository<Category>> GetCategoryRepository()
         {
