@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TicketManager.Management.Api.Services;
 using TicketManager.Management.Application;
+using TicketManager.Management.Application.Contracts;
 using TicketManager.Management.Infrastructure;
 using TicketManager.Management.Persistence;
 
@@ -12,6 +14,10 @@ namespace TicketManager.Management.Api
             builder.Services.AddApplicationServices();
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddPersistenceServices(builder.Configuration);
+
+            builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
+
+            builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddControllers();
 

@@ -10,6 +10,7 @@ using TicketManager.Management.Application.Features.Categories.Queries.GetCatego
 using TicketManager.Management.Application.Features.Events.Commands.CreateEvent;
 using TicketManager.Management.Application.Features.Events.Commands.UpdateEvent;
 using TicketManager.Management.Application.Features.Events.Queries.GetEventDetail;
+using TicketManager.Management.Application.Features.Events.Queries.GetEventsExport;
 using TicketManager.Management.Application.Features.Events.Queries.GetEventsList;
 using TicketManager.Management.Domain.Entities;
 
@@ -26,6 +27,7 @@ namespace TicketManager.Management.Application.Profiles
             CreateMap<Event, CreateEventCommand>().ReverseMap();
             CreateMap<Event, UpdateEventCommand>().ReverseMap();
             CreateMap<Event, CategoryEventDto>().ReverseMap();
+            CreateMap<Event, EventExportDto>().ReverseMap();
 
             //Category
             CreateMap<Category, CategoryDto>().ReverseMap();
